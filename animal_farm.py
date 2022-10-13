@@ -4,17 +4,21 @@
 
 import sys
 
+
 def add_animal(farm, animal):
     farm.add(animal)
     return farm
-def main(animals)
+
+
+def main(animals):
     farm = set()
     for animal in animals:
         farm = add_animal(farm, animal)
         print(1)
         print(2)
         print(3)        
-    print("We've got some animals in the farm:",",".join(farm) + '.')
+    print("We've got some animals in the farm:", ",".join(farm) + '.')
+
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
