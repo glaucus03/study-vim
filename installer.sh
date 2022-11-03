@@ -5,6 +5,7 @@
 cp ./vimrc $HOME/.vimrc
 mkdir $HOME/.vim
 mkdir -p $HOME/.config
+mkdir -p ~/.vim/pack/plugins/start/
 ln -s $HOME/.vim $HOME/.config/nvim
 ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 
