@@ -33,6 +33,12 @@ if !has('nvim')
     set wildmenu
 endif
 
+" insertを抜けるときにIMEをオフにする
+if executable('fcitx')
+   autocmd InsertLeave * :call system('fcitx-remote -c')
+   autocmd CmdlineLeave * :call system('fcitx-remote -c')
+endif
+
 " sets the language of the manu
 set langmenu=en_US.UTF-8    
 " sets the language of the message
@@ -57,8 +63,10 @@ set number
 set foldmethod=indent
 " set wildmenu
 set wildmode=list:longest,full
+" set vsplit as openright
+set splitright
 
-set clipboard+=unnamed
+set clipboard+=unnamed,unnamedplus
 " set color sheme
 " set background=dark
 set termguicolors
@@ -77,16 +85,19 @@ let g:plug_timeout = 300
 call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'ctrlpvim/ctrlp.vim'
+    " ファイル操作
     Plug 'scrooloose/nerdtree'
+    " Git
+    Plug 'lambdalisue/gina.vim'
     " コメントアウト
     Plug 'scrooloose/nerdcommenter'
     " fuzzy finder
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/fzf' ,{'do': { -> fzf#install()}}
     Plug 'junegunn/fzf.vim'
+    Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
     " snipetts
     Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
     " easymotion
     Plug 'easymotion/vim-easymotion'
     " ddc.vim本体
@@ -106,7 +117,6 @@ call plug#begin('~/.vim/plugged')
     " LSP
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/vim-lsp'
-    "Plug 'ycm-core/YouCompleteMe', {'do': './install.py'}
     " テーマカラー
     Plug 'tyrannicaltoucan/vim-quantum', {'do': 'cp colors/* ~/.vim/colors/'}
 call plug#end()
@@ -175,13 +185,17 @@ nnoremap <c-j> <c-w><c-j>
 nnoremap <c-k> <c-w><c-k>
 nnoremap <c-l> <c-w><c-l>
 
-nnoremap $e :edit $HOME/.vimrc<CR>
-nnoremap $r :source $HOME/.vimrc<CR>
-nnoremap $p :PlugInstall<CR>
+" terminal mode
+tnoremap <esc> <c-\><c-n>
+tnoremap <leader>q :bd!<cr>
+
+nnoremap $e :edit $HOME/.vimrc<cr>
+nnoremap $r :w<cr>:source $HOME/.vimrc<cr>
+nnoremap $p :PlugInstall<cr>
 
 " nerdtree keymap
-nnoremap <silent><c-e> :NERDTreeToggle<CR>
-nnoremap <leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent><c-e> :NERDTreeToggle<cr>
+nnoremap <leader>gd :YcmCompleter GoTo<cr>
 
 " easymotion
 map <Leader> <Plug>(easymotion-prefix)
@@ -212,6 +226,26 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+" fuzzy-finder
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResourcesRpc project_mru git<cr>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatusRpc<cr>
+nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActionsRpc<cr>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffersRpc<cr>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffersRpc<cr>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResourcesRpc buffer project_mru<cr>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumpsRpc<cr>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChangesRpc<cr>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<cr>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<cr>"<cr>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrepRpc<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<cr>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<cr>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<cr>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<cr>
 
 " debug speed
 function! ProfileCursorMove() abort
