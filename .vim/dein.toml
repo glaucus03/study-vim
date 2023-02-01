@@ -1,0 +1,106 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'glepnir/zephyr-nvim'
+hook_add = '''
+    colorscheme zephyr
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline#extensions#tabline#enabled = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+hook_add = '''
+    let g:airline_theme = 'deus'
+    let g:airline_powerline_fonts = 1
+'''
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+    let g:ctrlp_working_path_mode = 'ra'
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = 'yuki-yano/fzf-preview.vim'
+hook_add = '''
+    nmap <Leader>f [fzf-p]
+    xmap <Leader>f [fzf-p]
+
+    nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResourcesRpc project_mru git<cr>
+    nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatusRpc<cr>
+    nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActionsRpc<cr>
+    nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffersRpc<cr>
+    nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffersRpc<cr>
+    nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResourcesRpc buffer project_mru<cr>
+    nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumpsRpc<cr>
+    nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChangesRpc<cr>
+    nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<cr>
+    nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<cr>"<cr>
+    nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrepRpc<Space>
+    xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<cr>"
+    nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<cr>
+    nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<cr>
+    nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<cr>
+'''
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+    map <Leader> <Plug>(easymotion-prefix)
+    nmap s <Plug>(easymotion-overwin-f2)
+    let g:EasyMotion_do_mapping = 0 " Disable default mappings
+    let g:EasyMotion_smartcase = 1
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
+hook_add = '''
+    nnoremap <c-e> <Cmd>CocCommand explorer<cr>
+'''
+
+[[plugins]]
+repo = 'akinsho/toggleterm.nvim'
+
+[[plugins]]
+repo = 'kdheepak/lazygit.nvim'
+hook_add = '''
+    nnoremap <silent> <leader>gg :LazyGit<CR>
+'''
+
+[[plugins]]
+repo = 'numToStr/Comment.nvim'
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+hook_add = '''
+    nnoremap <leader>ff <cmd>Telescope find_files<cr>
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+    nnoremap <leader>fb <cmd>Telescope buffers<cr>
+    nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+'''
