@@ -1,15 +1,15 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-[[plugins]]
-repo = 'glepnir/zephyr-nvim'
-hook_add = '''
-    colorscheme zephyr
-'''
+#[[plugins]]
+#repo = 'glepnir/zephyr-nvim'
+#hook_add = '''
+#    colorscheme zephyr
+#'''
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
-    nnoremap <c-p> :CtrlPMixed<cr>
+    nnoremap <c-p> :CtrlPMixed
 '''
 
 [[plugins]]
