@@ -61,6 +61,7 @@ set backspace=2
 set number                  
 " set fold indent
 set foldmethod=indent
+set foldlevel=8
 " set wildmenu
 set wildmode=list:longest,full
 " set vsplit as openright
@@ -76,94 +77,6 @@ highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none 
-
-" plugin
-" タイムアウトを伸ばす
-let g:plug_timeout = 300
-" call plug#begin('~/.vim/plugged')
-"     Plug 'vim-airline/vim-airline'
-"     Plug 'vim-airline/vim-airline-themes'
-"     " ファイル操作
-"     Plug 'scrooloose/nerdtree'
-"     " Git
-"     Plug 'lambdalisue/gina.vim'
-"     " コメントアウト
-"     Plug 'scrooloose/nerdcommenter'
-"     " fuzzy finder
-"     Plug 'ctrlpvim/ctrlp.vim'
-"     Plug 'junegunn/fzf' ,{'do': { -> fzf#install()}}
-"     Plug 'junegunn/fzf.vim'
-"     Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
-"     " snipetts
-"     Plug 'SirVer/ultisnips'
-"     " easymotion
-"     Plug 'easymotion/vim-easymotion'
-"     " ddc.vim本体
-"     Plug 'Shougo/ddc.vim'
-"     " DenoでVimプラグインを開発するためのプラグイン
-"     Plug 'vim-denops/denops.vim'
-"     " ポップアップウィンドウを表示するプラグイン
-"     Plug 'Shougo/pum.vim'
-"     " カーソル周辺の既出単語を保管するsource
-"     Plug 'Shougo/ddc-around'
-"     " 入力中の単語を補完の対象にするfilter
-"     Plug 'Shougo/ddc-matcher_head'
-"     " 補完機能を適切にsortするfilter
-"     Plug 'Shougo/ddc-sorter_rank'
-"     " 補完候補の重複を防ぐためのfilter
-"     Plug 'Shougo/ddc-converter_remove_overlap'
-"     " LSP
-"     Plug 'mattn/vim-lsp-settings'
-"     Plug 'prabirshrestha/vim-lsp'
-"     " テーマカラー
-"     Plug 'tyrannicaltoucan/vim-quantum', {'do': 'cp colors/* ~/.vim/colors/'}
-"     " vital.vim
-"     Plug 'vim-jp/vital.vim'
-" call plug#end()
-
-" ddc-vim setting
-" call ddc#custom#patch_global('sources', ['around'])
-
-" Use matcher_head and sorter_rank.
-" https://github.com/Shougo/ddc-matcher_head
-" https://github.com/Shougo/ddc-sorter_rank
-" call ddc#custom#patch_global('sourceOptions', {
-"       \ '_': {
-"       \   'matchers': ['matcher_head'],
-"       \   'sorters': ['sorter_rank']},
-"       \ })
-
-" Change source options
-" call ddc#custom#patch_global('sourceOptions', {
-"       \ 'around': {'mark': 'A'},
-"       \ })
-" call ddc#custom#patch_global('sourceParams', {
-"       \ 'around': {'maxSize': 500},
-"       \ })
-
-" Customize settings on a filetype
-" call ddc#custom#patch_filetype(['c', 'cpp'], 'sources', ['around', 'clangd'])
-" call ddc#custom#patch_filetype(['c', 'cpp'], 'sourceOptions', {
-"       \ 'clangd': {'mark': 'C'},
-"       \ })
-" call ddc#custom#patch_filetype('markdown', 'sourceParams', {
-"       \ 'around': {'maxSize': 100},
-"       \ })
-
-" Mappings
-
-" <TAB>: completion.
-" inoremap <silent><expr> <TAB>
-" \ ddc#map#pum_visible() ? '<C-n>' :
-" \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-" \ '<TAB>' : ddc#map#manual_complete()
-" 
-" " <S-TAB>: completion back.
-" inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-
-" Use ddc.
-" call ddc#enable()
-
 
 " set key mapping
 let mapleader = "\<space>"
@@ -199,23 +112,6 @@ nnoremap $p :PlugInstall<cr>
 
 " nerdtree keymap
 nnoremap <leader>gd :YcmCompleter GoTo<cr>
-
-" NERD Commenter Default
-" <leader>c<space> カーソル行のコメントの状態切り替え
-" <leader>cA 行末にコメントを追加する
-" <leader>cs ブロックコメントを挿入する
-
-" plugin setting
-
-" コメントアウトのあとにスペースを挿入する
-let g:NERDSpaceDelims=1
-" コメントアウトの記号をそろえる
-let g:NERDDefaultAlign='left'
-
-" snipetts
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " load dein.vim
 let $CACHE = expand('~/.cache')

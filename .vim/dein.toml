@@ -6,6 +6,11 @@ repo = 'glepnir/zephyr-nvim'
 hook_add = '''
     colorscheme zephyr
 '''
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+    nnoremap <c-p> :CtrlPMixed<cr>
+'''
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
@@ -14,6 +19,7 @@ repo = 'nvim-treesitter/nvim-treesitter'
 repo = 'vim-airline/vim-airline'
 hook_add = '''
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
 '''
 
 [[plugins]]
@@ -24,12 +30,6 @@ hook_add = '''
 '''
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
-
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-    let g:ctrlp_working_path_mode = 'ra'
-'''
 
 [[plugins]]
 repo = 'junegunn/fzf'
@@ -76,6 +76,19 @@ repo = 'neoclide/coc.nvim'
 build = 'coc#util#install()'
 hook_add = '''
     nnoremap <c-e> <Cmd>CocCommand explorer<cr>
+    """ <Tab>で候補をナビゲート
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    inoremap <silent><expr> <Tab>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<Tab>" :
+          \ coc#refresh()
+    """ <Tab>で次、<S+Tab>で前
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 '''
 
 [[plugins]]
@@ -95,12 +108,3 @@ repo = 'kyazdani42/nvim-web-devicons'
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
-
-[[plugins]]
-repo = 'nvim-telescope/telescope.nvim'
-hook_add = '''
-    nnoremap <leader>ff <cmd>Telescope find_files<cr>
-    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-    nnoremap <leader>fb <cmd>Telescope buffers<cr>
-    nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-'''
