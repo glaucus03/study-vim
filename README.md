@@ -2,7 +2,7 @@
 - 工事中...
 
 # TODO
-- 初期設定方法の整備
-- ultisnipsの整備
-- git環境の整備
 - lsp周りの整備
+- debuggerの設定
+- fuzzyfinder系の整備
+- memo周りの整備
