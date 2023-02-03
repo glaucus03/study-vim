@@ -1,6 +1,9 @@
 {
     "explorer.icon.enableNerdfont": true,
     "explorer.previewAction.onHover": false,
+    "explorer.file.cdCommand":"cd",
+    "explorer.autoExpandOptions":["uncompact","uncompact"],
+    "explorer.buffer.showHiddenBuffers":true,
     "explorer.keyMappings.global": {
         "<cr>": ["expandable?", "expand", "open"],
         "v": "open:vsplit"
