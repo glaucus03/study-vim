@@ -5,6 +5,5 @@
     "explorer.autoExpandOptions":["uncompact","uncompact"],
     "explorer.buffer.showHiddenBuffers":true,
     "explorer.keyMappings.global": {
-        "<cr>": ["expandable?", "expand", "open"],
         "v": "open:vsplit"
 }

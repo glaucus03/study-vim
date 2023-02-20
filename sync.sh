@@ -1,1 +1,1 @@
-cp ~/.vim/* ./.vim/
+cp -rf ~/.vim/* ./.vim/
